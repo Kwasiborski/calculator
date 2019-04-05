@@ -10,39 +10,45 @@ import service.MathOperationsImpl;
 
 
 public class Calculator extends MathOperationsImpl {
-    private static JFrame calculatorFrame;
+    private static final int MAXIMUM_FRACTION_DIGITS = 2;
 
-    public JTextField valueField;
-    public JTextField resultTextField;
+    private static JFrame calculatorFrame = new JFrame();
+
+    private JTextField valueField;
+    private JTextField resultTextField;
+
     private JPanel calculatorPanel;
 
-    public JRadioButton bruttoToNettoRadioButton;
-    public JRadioButton nettoToBruttoRadioButton;
+    private JRadioButton bruttoToNettoRadioButton;
+    private JRadioButton nettoToBruttoRadioButton;
 
-    public JButton resultButton;
-    public JButton resetButton;
+    private JButton resultButton;
+    private JButton resetButton;
 
     private JLabel alertLabel;
 
 // deklaracja zmiennej boolean potrzebnej do okreslenia wyboru na radiobuttonie
-    public boolean bruttoToNettoChosen = true;
+    private boolean bruttoToNettoChosen = true;
 
 
-    public static void main(String[] args) {
-       //budowa ramki kalkulatora
+    public Calculator() {
+        initializeComponents();
+
+        prepareComponents();
+
+        prepareMenuBar();
+    }
+
+    private void initializeComponents(){
         calculatorFrame = new JFrame("Calculator");
-
-        Calculator calculator = new Calculator();
-        calculator.prepareComponents();
-        calculator.prepareMenuBar();
-
-        calculatorFrame.setContentPane(calculator.calculatorPanel);
+        calculatorFrame.setContentPane(calculatorPanel);
         calculatorFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         calculatorFrame.setResizable(false);
         calculatorFrame.pack();
         calculatorFrame.setVisible(true);
     }
 
+    //todo zmienić nazwę
     public void prepareComponents() {
         // jeżeli wybrany jest przycisk bruttoToNettoRadioButton wtedy zmienna boolean ma wartosc true
         bruttoToNettoRadioButton.addActionListener(new ActionListener() {
@@ -70,7 +76,7 @@ public class Calculator extends MathOperationsImpl {
                 double result = calculateResult(bruttoToNettoChosen, valueField.getText());
                 //stworzenie formatu wyswietlania result do formy do dwoch miejsc po przecinku
                 DecimalFormat resultBnNc = new DecimalFormat();
-                resultBnNc.setMaximumFractionDigits(2);
+                resultBnNc.setMaximumFractionDigits(MAXIMUM_FRACTION_DIGITS);
                 resultTextField.setText(resultBnNc.format(result));
             }
         });
@@ -88,7 +94,7 @@ public class Calculator extends MathOperationsImpl {
         });
     }
 
-    private void prepareMenuBar() {
+    public void prepareMenuBar() {
         JMenuBar menuBar = new JMenuBar();
         JMenu infoMenu = new JMenu("Info");
         menuBar.add(infoMenu);
@@ -111,4 +117,3 @@ public class Calculator extends MathOperationsImpl {
         calculatorFrame.setJMenuBar(menuBar);
     }
 }
-

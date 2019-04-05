@@ -1,4 +1,4 @@
-package interfaces;
+package service.interfaces;
 
 public interface IMathOperations {
     double multiply(double firstValue, double secondValue);
