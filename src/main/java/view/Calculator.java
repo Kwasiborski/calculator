@@ -1,32 +1,35 @@
+package view;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.text.DecimalFormat;
+import service.MathOperationsImpl;
 
 
-public class Calculator {
+public class Calculator extends MathOperationsImpl {
     private static JFrame calculatorFrame;
 
+    public JTextField valueField;
+    public JTextField resultTextField;
     private JPanel calculatorPanel;
 
-    private JTextField valueField;
-    private JTextField resultTextField;
+    public JRadioButton bruttoToNettoRadioButton;
+    public JRadioButton nettoToBruttoRadioButton;
 
-    private JRadioButton bruttoToNettoRadioButton;
-    private JRadioButton nettoToBruttoRadioButton;
-
-    private JButton resultButton;
-    private JButton resetButton;
+    public JButton resultButton;
+    public JButton resetButton;
 
     private JLabel alertLabel;
 
-    private double tax = 1.23;
-
-    private boolean bruttoToNettoChosen = true;
+// deklaracja zmiennej boolean potrzebnej do okreslenia wyboru na radiobuttonie
+    public boolean bruttoToNettoChosen = true;
 
 
     public static void main(String[] args) {
+       //budowa ramki kalkulatora
         calculatorFrame = new JFrame("Calculator");
 
         Calculator calculator = new Calculator();
@@ -40,7 +43,8 @@ public class Calculator {
         calculatorFrame.setVisible(true);
     }
 
-    private void prepareComponents() {
+    public void prepareComponents() {
+        // jeżeli wybrany jest przycisk bruttoToNettoRadioButton wtedy zmienna boolean ma wartosc true
         bruttoToNettoRadioButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 bruttoToNettoChosen = true;
@@ -52,7 +56,7 @@ public class Calculator {
                 bruttoToNettoChosen = false;
             }
         });
-
+        //opis dzialania przycisku reset
         resetButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 valueField.setText("");
@@ -62,17 +66,22 @@ public class Calculator {
 
         resultButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                calculateResult(bruttoToNettoChosen);
+                //deklaracja zmiennej result typu double, korzysta z funkcji calculateResult
+                double result = calculateResult(bruttoToNettoChosen, valueField.getText());
+                //stworzenie formatu wyswietlania result do formy do dwoch miejsc po przecinku
+                DecimalFormat resultBnNc = new DecimalFormat();
+                resultBnNc.setMaximumFractionDigits(2);
+                resultTextField.setText(resultBnNc.format(result));
             }
         });
-
+        // zablokowanie mozliwosci wpisywania liter oraz wyswietlanie napisu przy probie wpisania niepozadanego znaku
         valueField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
-                if (!((e.getKeyChar() >= '0' && e.getKeyChar() <= '9') || e.getKeyChar() == '.'|| e.getKeyChar()==8)){
+                if (!((e.getKeyChar() >= '0' && e.getKeyChar() <= '9') || e.getKeyChar() == '.' || e.getKeyChar() == 8)) {
                     e.consume();
                     alertLabel.setText("Type only numbers!");
-                }else {
+                } else {
                     alertLabel.setText("");
                 }
             }
@@ -101,19 +110,5 @@ public class Calculator {
 
         calculatorFrame.setJMenuBar(menuBar);
     }
-
-    private void calculateResult(boolean multiply) {
-        double result;
-
-        if (multiply) {
-            result = Double.parseDouble(valueField.getText()) * tax;
-        } else {
-            result = Double.parseDouble(valueField.getText()) / tax;
-        }
-
-        java.text.DecimalFormat resultBnNc = new java.text.DecimalFormat();
-        resultBnNc.setMaximumFractionDigits(2);
-        resultBnNc.setMinimumFractionDigits(2);
-        resultTextField.setText(resultBnNc.format(result));
-    }
 }
+

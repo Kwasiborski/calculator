@@ -1,3 +1,5 @@
+package view;
+
 import javax.swing.*;
 
 public class InfoAbout {
@@ -9,7 +11,6 @@ public class InfoAbout {
         infoFrame.setContentPane(new InfoAbout().infoPanel);
         infoFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         infoFrame.pack();
-        infoFrame.setResizable(false);
         infoFrame.setVisible(true);
     }
 }
