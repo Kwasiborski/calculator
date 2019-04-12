@@ -1,4 +1,5 @@
-D:\calculator\src\main\java\view\InfoAbout.java
-D:\calculator\src\main\java\service\MathOperationsImpl.java
-D:\calculator\src\main\java\interfaces\IMathOperations.java
-D:\calculator\src\main\java\view\Calculator.java
+D:\calculator\src\main\java\com\sk\Main.java
+D:\calculator\src\main\java\com\sk\service\MathOperationsImpl.java
+D:\calculator\src\main\java\com\sk\view\InfoAbout.java
+D:\calculator\src\main\java\com\sk\view\Calculator.java
+D:\calculator\src\main\java\com\sk\service\interfaces\IMathOperations.java
