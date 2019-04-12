@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
-
 import com.sk.service.MathOperationsImpl;
 public class Calculator extends MathOperationsImpl {
     private static final int MAXIMUM_FRACTION_DIGITS = 2;
@@ -18,11 +17,11 @@ public class Calculator extends MathOperationsImpl {
 
     private JPanel calculatorPanel;
 
-    private JRadioButton bruttoToNettoRadioButton;
-    private JRadioButton nettoToBruttoRadioButton;
+    private JRadioButton bruttoToNettoRadioButton = new JRadioButton();
+    private JRadioButton nettoToBruttoRadioButton = new JRadioButton();
 
     private JButton resultButton;
-    private JButton resetButton;
+    private JButton resetButton ;
 
     private JLabel alertLabel;
 
