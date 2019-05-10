@@ -17,8 +17,8 @@ public class Calculator extends MathOperationsImpl {
 
     private JPanel calculatorPanel;
 
-    private JRadioButton bruttoToNettoRadioButton = new JRadioButton();
-    private JRadioButton nettoToBruttoRadioButton = new JRadioButton();
+    private JRadioButton bruttoToNettoRadioButton;
+    private JRadioButton nettoToBruttoRadioButton;
 
     private JButton resultButton;
     private JButton resetButton ;
@@ -26,14 +26,14 @@ public class Calculator extends MathOperationsImpl {
     private JLabel alertLabel;
 
     // declaration boolean to indicate choose on radiobutton
-    private boolean bruttoToNettoChosen = true;
+    private boolean bruttoToNettoChosen = false;
 
     String Reset = "";
 
     public Calculator() {
-        prepareMenuBar();
-
         workSpace();
+
+        prepareMenuBar();
 
         initializeComponents();
     }
@@ -42,13 +42,14 @@ public class Calculator extends MathOperationsImpl {
         calculatorFrame = new JFrame("Calculator");
         calculatorFrame.setContentPane(calculatorPanel);
         calculatorFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        calculatorFrame.setResizable(true);
+        calculatorFrame.setResizable(false);
         calculatorFrame.pack();
         calculatorFrame.setVisible(true);
+
     }
 
     public void workSpace() {
-        // if bruttoToNettoRadioButton is choosen that boolean is true
+        // if bruttoToNettoRadioButton is choosen that boolean is false
         bruttoToNettoRadioButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 bruttoToNettoChosen = false;
@@ -64,6 +65,7 @@ public class Calculator extends MathOperationsImpl {
             public void actionPerformed(ActionEvent e) {
                 valueField.setText(Reset);
                 resultTextField.setText(Reset);
+                alertLabel.setText(Reset);
             }
         });
         resultButton.addActionListener(new ActionListener() {
@@ -108,10 +110,10 @@ public class Calculator extends MathOperationsImpl {
                 frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
                 frame.pack();
                 frame.setVisible(true);
-                frame.setResizable(false);
+                frame.setResizable(true);
             }
         });
         calculatorFrame.setJMenuBar(menuBar);
-
     }
+
 }

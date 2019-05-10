@@ -12,5 +12,6 @@ public class InfoAbout {
         infoFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         infoFrame.pack();
         infoFrame.setVisible(true);
+
     }
 }
