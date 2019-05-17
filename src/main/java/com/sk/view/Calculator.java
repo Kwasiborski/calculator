@@ -11,25 +11,26 @@ public class Calculator extends MathOperationsImpl {
     private static final int MAXIMUM_FRACTION_DIGITS = 2;
 
     private JFrame calculatorFrame = new JFrame("calculator");
-    private JTextField valueField;
-    private JTextField resultTextField;
+    private JPanel calculatorPanel = new JPanel();
+    private JLabel valueFieldLabel = new JLabel();
+    private JLabel resultTextFieldLabel = new JLabel();
+    private JTextField valueField = new JTextField();
+    private JTextField resultTextField = new JTextField() ;
 
-    private JPanel calculatorPanel;
 
-    private JRadioButton bruttoToNettoRadioButton;
-    private JRadioButton nettoToBruttoRadioButton;
+    private JRadioButton bruttoToNettoRadioButton = new JRadioButton("Brutto -> Netto",true);
+    private JRadioButton nettoToBruttoRadioButton = new JRadioButton("Netto -> Brutto",false);
 
-    private JButton resultButton;
-    private JButton resetButton;
+    private JButton resultButton = new JButton();
+    private JButton resetButton = new JButton();
 
-    private JLabel alertLabel;
-    private ButtonGroup buttonGroup1;
+    private JLabel alertLabel = new JLabel();
+    private ButtonGroup buttonGroup = new ButtonGroup();
 
-    // declaration boolean to indicate choose on radiobutton
-    private boolean bruttoToNettoChosen = false;
+
 
     String Reset = "";
-
+    int result;
     public Calculator() {
         initializeComponents();
 
@@ -44,6 +45,21 @@ public class Calculator extends MathOperationsImpl {
         calculatorFrame.setResizable(false);
         calculatorFrame.pack();
         calculatorFrame.setVisible(true);
+        calculatorFrame.setSize(230,320);
+        buttonGroup.add(bruttoToNettoRadioButton);
+        buttonGroup.add(nettoToBruttoRadioButton);
+        calculatorFrame.add(bruttoToNettoRadioButton);
+        calculatorFrame.add(nettoToBruttoRadioButton);
+        calculatorFrame.add(valueField);
+        valueFieldLabel.setLabelFor(valueField);
+        valueField.setSize(150,30);
+        resultTextFieldLabel.setLabelFor(resultTextField);
+        calculatorFrame.add(resultTextField);
+        resultTextField.setSize(150,30);
+
+
+        valueField.setEditable(true);
+
 
     }
     public void prepareMenuBar() {
@@ -78,17 +94,6 @@ public class Calculator extends MathOperationsImpl {
         calculatorFrame.setJMenuBar(menuBar);
     }
     public void workSpace() {
-        // if bruttoToNettoRadioButton is choosen that boolean is false
-        bruttoToNettoRadioButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                bruttoToNettoChosen = false;
-            }
-        });
-        nettoToBruttoRadioButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                bruttoToNettoChosen = true;
-            }
-        });
         //How to work reset button
         resetButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -100,7 +105,6 @@ public class Calculator extends MathOperationsImpl {
         resultButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //declaration variable result type double, uses function calculateResult
-                double result = calculateResult(bruttoToNettoChosen, valueField.getText());
                 //make format to show only number to two decimal places
                 DecimalFormat resultBnNc = new DecimalFormat();
                 resultBnNc.setMaximumFractionDigits(MAXIMUM_FRACTION_DIGITS);
@@ -119,7 +123,5 @@ public class Calculator extends MathOperationsImpl {
                 }
             }
         });
-        //disable to enter char in resultTextField
-        resultTextField.setEditable(false);
     }
 }
