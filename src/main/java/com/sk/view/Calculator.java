@@ -10,8 +10,7 @@ import com.sk.service.MathOperationsImpl;
 public class Calculator extends MathOperationsImpl {
     private static final int MAXIMUM_FRACTION_DIGITS = 2;
 
-    private JFrame calculatorFrame = new JFrame();
-
+    private JFrame calculatorFrame = new JFrame("calculator");
     private JTextField valueField;
     private JTextField resultTextField;
 
@@ -21,9 +20,10 @@ public class Calculator extends MathOperationsImpl {
     private JRadioButton nettoToBruttoRadioButton;
 
     private JButton resultButton;
-    private JButton resetButton ;
+    private JButton resetButton;
 
     private JLabel alertLabel;
+    private ButtonGroup buttonGroup1;
 
     // declaration boolean to indicate choose on radiobutton
     private boolean bruttoToNettoChosen = false;
@@ -31,15 +31,14 @@ public class Calculator extends MathOperationsImpl {
     String Reset = "";
 
     public Calculator() {
-        workSpace();
+        initializeComponents();
 
         prepareMenuBar();
 
-        initializeComponents();
+        workSpace();
     }
 
     public void initializeComponents(){
-        calculatorFrame = new JFrame("Calculator");
         calculatorFrame.setContentPane(calculatorPanel);
         calculatorFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         calculatorFrame.setResizable(false);
@@ -47,7 +46,37 @@ public class Calculator extends MathOperationsImpl {
         calculatorFrame.setVisible(true);
 
     }
+    public void prepareMenuBar() {
+        JMenuBar menuBar = new JMenuBar();
+        JMenu infoMenu = new JMenu("Info");
+        menuBar.add(infoMenu);
 
+
+        JMenuItem infoMenuItem = new JMenuItem("Info about author");
+        infoMenu.add(infoMenuItem);
+        menuBar.setVisible(true);
+
+        infoMenu.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JFrame infoFrame = new JFrame("InfoAbout");
+                infoFrame.setContentPane(new InfoAbout().infoPanel);
+                infoFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                infoFrame.pack();
+                infoFrame.setVisible(true);
+            }
+        });
+        infoMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame("Info About");
+                frame.setContentPane(new InfoAbout().infoPanel);
+                frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                frame.pack();
+                frame.setVisible(true);
+                frame.setResizable(true);
+            }
+        });
+        calculatorFrame.setJMenuBar(menuBar);
+    }
     public void workSpace() {
         // if bruttoToNettoRadioButton is choosen that boolean is false
         bruttoToNettoRadioButton.addActionListener(new ActionListener() {
@@ -93,27 +122,4 @@ public class Calculator extends MathOperationsImpl {
         //disable to enter char in resultTextField
         resultTextField.setEditable(false);
     }
-
-    public void prepareMenuBar() {
-        JMenuBar menuBar = new JMenuBar();
-        JMenu infoMenu = new JMenu("Info");
-        menuBar.add(infoMenu);
-
-        JMenuItem infoMenuItem = new JMenuItem("Info about author");
-        infoMenu.add(infoMenuItem);
-        menuBar.setVisible(true);
-
-        infoMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JFrame frame = new JFrame("Info About");
-                frame.setContentPane(new InfoAbout().infoPanel);
-                frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-                frame.pack();
-                frame.setVisible(true);
-                frame.setResizable(true);
-            }
-        });
-        calculatorFrame.setJMenuBar(menuBar);
-    }
-
 }

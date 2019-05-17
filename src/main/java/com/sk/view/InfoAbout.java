@@ -4,7 +4,6 @@ import javax.swing.*;
 
 public class InfoAbout {
     public JPanel infoPanel;
-
     public static void main(String[] args) {
 
         JFrame infoFrame = new JFrame("InfoAbout");
