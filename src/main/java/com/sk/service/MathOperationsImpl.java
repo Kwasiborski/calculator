@@ -3,10 +3,11 @@ package com.sk.service;
 import com.sk.service.interfaces.IMathOperations;
 
     //make MathOperationsImpl class which implement IMathOperations and declarate what this class do
+
 public class MathOperationsImpl implements IMathOperations {
     //calculateResult gets info from boolean(radiobuttons) and entered value in valueField as string and parse to double
 
-    protected double calculateResult(boolean multiply, String text) {
+    public double calculateResult(boolean multiply, String text) {
         double tax = 1.23;
         double value = Double.parseDouble(text);
 
