@@ -7,9 +7,8 @@ import com.sk.service.interfaces.IMathOperations;
 public class MathOperationsImpl implements IMathOperations {
     //calculateResult gets info from boolean(radiobuttons) and entered value in valueField as string and parse to double
 
-    public double calculateResult(boolean multiply, String text) {
+    public double calculateResult(boolean multiply, double value) {
         double tax = 1.23;
-        double value = Double.parseDouble(text);
 
         if (multiply) return multiply(value, tax);
         else return divide(value, tax);

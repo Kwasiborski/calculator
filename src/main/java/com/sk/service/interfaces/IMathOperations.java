@@ -5,5 +5,5 @@ public interface IMathOperations {
 
     double divide(double firstValue, double secondValue);
 
-    double calculateResult(boolean multiply, String text);
+    double calculateResult(boolean multiply, double value);
 }

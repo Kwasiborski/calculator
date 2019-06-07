@@ -136,7 +136,7 @@ public class Calculator extends MathOperationsImpl {
                 //make format to show only number to two decimal places
                 DecimalFormat resultcorrected = new DecimalFormat();
                 resultcorrected.setMaximumFractionDigits(MAXIMUM_FRACTION_DIGITS);
-                resultTextField.setText(resultcorrected.format(mathOperations.calculateResult(nettoToBruttoRadioButton.isSelected() ? true : false, valueField.getText())));
+                resultTextField.setText(resultcorrected.format(mathOperations.calculateResult(nettoToBruttoRadioButton.isSelected() ? true : false, Double.parseDouble( valueField.getText()))));
             }
         });
         //disable to enter letters and show alert when trying to enter unsupported char
@@ -149,6 +149,7 @@ public class Calculator extends MathOperationsImpl {
                 } else {
                     alertLabel.setText(Reset);
                 }
+
             }
         });
     }
